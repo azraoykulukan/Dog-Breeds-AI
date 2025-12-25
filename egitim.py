@@ -7,17 +7,13 @@ import matplotlib.pyplot as plt
 
 import os
 
-# =========================
-# AYARLAR
-# =========================
-DATASET_DIR = r"C:\Users\Eren\Desktop\dog-breeds" # dataset ana klasörü
+
+DATASET_DIR = r"D:\Azra Oyku ULUKAN\uni\4\DerinOgrenme\proje\dog-breeds" # dataset ana klasörü
 IMG_SIZE = (128, 128)
 BATCH_SIZE = 8
 EPOCHS = 20
 
-# =========================
-# DATA AUGMENTATION & PREPROCESSING
-# =========================
+
 train_datagen = ImageDataGenerator(
     rescale=1./255,
     validation_split=0.2,  # %20 validation
@@ -46,9 +42,7 @@ val_generator = train_datagen.flow_from_directory(
 NUM_CLASSES = train_generator.num_classes
 print("Sınıf sayısı:", NUM_CLASSES)
 
-# =========================
-# CNN MODEL
-# =========================
+
 model = models.Sequential([
     layers.Conv2D(32, (3,3), activation='relu', input_shape=(IMG_SIZE[0], IMG_SIZE[1], 3)),
     layers.MaxPooling2D(2,2),
@@ -73,18 +67,14 @@ model.compile(
 
 model.summary()
 
-# =========================
-# EĞİTİM
-# =========================
+
 history = model.fit(
     train_generator,
     validation_data=val_generator,
     epochs=EPOCHS
 )
 
-# =========================
-# GRAFİKLER
-# =========================
+
 plt.plot(history.history['accuracy'], label='Train Acc')
 plt.plot(history.history['val_accuracy'], label='Val Acc')
 plt.legend()
@@ -97,8 +87,6 @@ plt.legend()
 plt.title("Loss")
 plt.show()
 
-# =========================
-# MODEL KAYDET
-# =========================
+
 model.save("dog_breeds_cnn.h5")
 print("✅ Model kaydedildi: dog_breeds_cnn.h5")

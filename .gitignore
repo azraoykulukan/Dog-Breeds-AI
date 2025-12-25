@@ -1,0 +1,21 @@
+# Virtual environments
+.venv/
+.venv312/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDEs
+.idea/
+.vscode/
+
+# Model and large files
+*.h5
+
+# Logs
+*.log
+
+# Mac files
+.DS_Store
